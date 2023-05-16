@@ -1,0 +1,61 @@
+import pygame  
+import random  
+  
+# 初始化Pygame库  
+pygame.init()  
+  
+# 设置游戏窗口大小  
+screen_width = 800  
+screen_height = 600  
+screen = pygame.display.set_mode((screen_width, screen_height))  
+  
+# 设置游戏标题  
+pygame.display.set_caption('3D Shooter')  
+  
+# 设置游戏难度  
+difficulty = 1  
+  
+# 定义敌人类  
+class Enemy:  
+    def __init__(self):  
+        self.x = random.randint(0, screen_width)  
+        self.y = random.randint(0, screen_height)  
+        self.health = 10  
+        self.firepower = random.randint(1, 5)  
+        self.speed = random.randint(1, 5)  
+        self.target = None  
+          
+    def update(self):  
+        self.health -= 1  
+          
+        if self.health <= 0:  
+            self.target = None  
+              
+            # 随机移动  
+            self.x += self.speed  
+            self.y += self.speed  
+              
+            # 检查敌人是否被摧毁  
+            if self.health <= 0:  
+                self.target = None  
+                  
+                # 如果敌人被摧毁，重新生成一个新的敌人  
+                self.health = random.randint(1, 10)  
+                self.firepower = random.randint(1, 5)  
+                self.speed = random.randint(1, 5)  
+                self.target = None  
+                  
+                # 更新敌人的生命值、火力和速度  
+                for i in range(len(enemies)):  
+                    if i != self:  
+                        for j in range(len(turrets[i])):  
+                            if turrets[i][j]['target'] is not None:  
+                                turrets[i][j]['health'] -= self.firepower  
+                                turrets[i][j]['firepower'] = random.randint(1, 10)  
+                                turrets[i][j]['speed'] = random.randint(1, 10)  
+                                turrets[i][j]['target_health'] = 3  
+                                turrets[i][j]['target_health'] -= self.firepower  
+                                  
+            # 绘制敌人  
+            for i in range(len(turrets)):  
+                turrets[i]['target'] = pygame.draw.circle(screen, (255, 0, 0), (self.health, self.speed), self.targe
