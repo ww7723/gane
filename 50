@@ -1,0 +1,17 @@
+#include <stdio.h>  
+#include <stdlib.h>  
+#include <time.h>  
+  
+#define MAX_ENEMY 10  
+#define MAX_TURRETS 10  
+#define MAX_PLAYERS 10  
+  
+int turrets[MAX_TURRETS][MAX_PLAYERS];  
+int enemies[MAX_ENEMY];  
+int player_health;  
+int player_score;  
+  
+void init_turrets() {  
+    for (int i = 0; i < MAX_TURRETS; i++) {  
+        for (int j = 0; j < MAX_PLAYERS; j++) {  
+            turrets[i][j] = 
